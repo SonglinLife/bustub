@@ -261,11 +261,23 @@ set(P0_FILES
         "src/primer/count_min_sketch.cpp"
 )
 
+set(P0_ROBIN_HOOD_FILES
+        "src/include/primer/robin_hood_hash_set.h"
+        "src/primer/robin_hood_hash_set.cpp"
+)
+
 add_custom_target(check-clang-tidy-p0
         ${BUSTUB_BUILD_SUPPORT_DIR}/run_clang_tidy.py # run LLVM's clang-tidy script
         -clang-tidy-binary ${CLANG_TIDY_BIN} # using our clang-tidy binary
         -p ${CMAKE_BINARY_DIR} # using cmake's generated compile commands
         ${P0_FILES}
+)
+
+add_custom_target(check-clang-tidy-p0-robin-hood-hashing
+        ${BUSTUB_BUILD_SUPPORT_DIR}/run_clang_tidy.py # run LLVM's clang-tidy script
+        -clang-tidy-binary ${CLANG_TIDY_BIN} # using our clang-tidy binary
+        -p ${CMAKE_BINARY_DIR} # using cmake's generated compile commands
+        ${P0_ROBIN_HOOD_FILES}
 )
 add_custom_target(submit-p0
         zip project0-submission.zip
@@ -322,7 +334,6 @@ add_custom_target(submit-p2
 )
 
 set(P3_FILES
-        "src/include/execution/plans/index_scan_plan.h"
         "src/include/execution/executors/aggregation_executor.h"
         "src/include/execution/executors/delete_executor.h"
         "src/include/execution/executors/filter_executor.h"
